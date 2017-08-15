@@ -1,0 +1,13 @@
+.main{
+  background: #111D21;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.pt{
+  width: 100px;
+  background: #1F363D;
+  text-align: center;
+  padding: 1em;
+  margin: 0.1em;
+}
