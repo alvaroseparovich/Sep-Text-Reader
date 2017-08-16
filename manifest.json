@@ -1,12 +1,12 @@
 {
 	"name":"Sep Text Reader",
-	"description":"This extenssion allow you to hear your pages, rest your eyes and read Faster like thunder",
-	"version":"0.1",
+	"description":"This extenssion allow you to hear your pages, rest your eyes and read Faster like a thunder",
+	"version":"0.0.1",
 	"manifest_version": 2,
 	"browser_action":{
 		"default_icon":"icon.png",
 		"default_popup":"popup.html",
-		"default_title":"Click here"
+		"default_title":"Sep Text Reader"
 	}
 
 }

@@ -6,8 +6,11 @@
 }
 .pt{
   width: 100px;
-  background: #1F363D;
+  background: #5DA1B8;
   text-align: center;
-  padding: 1em;
-  margin: 0.1em;
+  padding: 0.5em;
+  margin: 0.5em;
+  color: #111D21;
+  font-size: 1.5em;
+  font-weight: bold;
 }
