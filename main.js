@@ -60,5 +60,5 @@ class Speaker{
 }
 
 sep = new Speaker();
-
-document.addEventListener('click', sep.select(event))
+chrome.tabs.executeScript(null, {file: "content_script.js"});
+document.addEventListener('click', sep.select(event));

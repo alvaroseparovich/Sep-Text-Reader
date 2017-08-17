@@ -3,10 +3,24 @@
 	"description":"This extenssion allow you to hear your pages, rest your eyes and read Faster like a thunder",
 	"version":"0.0.1",
 	"manifest_version": 2,
+
+	"permissions":[
+		"activeTab",
+    "<all_urls>",
+    "tts"
+	],
+	"backgorund":{"scripts":["background.js"]},
+	"content_scripts": [
+    {
+      "matches":		 ["<all_urls>"],
+      "all_frames": true,
+      "css":				 ["content_styles.css"],
+      "js":					 ["content_script.js"]
+    }
+  ],
 	"browser_action":{
 		"default_icon":"icon.png",
 		"default_popup":"popup.html",
 		"default_title":"Sep Text Reader"
 	}
-
 }
