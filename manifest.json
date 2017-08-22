@@ -9,7 +9,7 @@
     "<all_urls>",
     "tts"
 	],
-	"backgorund":{"scripts":["background.js"]},
+	"background":{"scripts":["background.js"]},
 	"content_scripts": [
     {
       "matches":		 ["<all_urls>"],
