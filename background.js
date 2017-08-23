@@ -20,6 +20,18 @@ function initBackground(){
         sep.text(request['speak']);
         sep.speak();
       }
+      else if(request[greeting]){
+        sep.text(request[greeting]);
+        sep.speak();
+      }
     });
+/*
+function handleMessage(request, sender, sendResponse) {
+  sep.text(request.greeting);
+  sep.speak();
+  sendResponse({response: "Response from background script"});
+}*/
+
+browser.runtime.onMessage.addListener(handleMessage);
 }
 initBackground();
