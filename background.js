@@ -16,8 +16,8 @@ function initBackground(){
   loadContentScriptInAllTabs();
   chrome.extension.onRequest.addListener(
     function(request, sender, sendResponse) {
-      if (request['text']) {
-        sep.text(request['text']);
+      if (request['speak']) {
+        sep.text(request['speak']);
         sep.speak();
       }
     });
