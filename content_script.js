@@ -1,3 +1,6 @@
-console.log('onpage');
-var mulambo = 'mulambo = "123"';
-document.onload = function(){alert(mulambo)};
+document.addEventListener('click', function p(evento){
+  console.log('Speak =>' + evento.target.innerText);
+  chrome.extension.sendRequest({'text': evento.target.innerText})
+});
+
+console.log('content_script Played!');
