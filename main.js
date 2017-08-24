@@ -59,4 +59,4 @@ class Speaker{
 
 }
 
-sep = new Speaker();
+sep = new Speaker('pt-BR');

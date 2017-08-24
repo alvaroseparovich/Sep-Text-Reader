@@ -1,7 +1,15 @@
+
+function handleResponse(message) {console.log(`Message from the background script:  ${message.response}`);}
+
+function handleError(error) {console.log(`Error: ${error}`);}
+
 document.addEventListener('dblclick', function p(evento){
   console.log('Speak =>' + evento.target.innerText);
-  chrome.extension.sendRequest({'speak': evento.target.innerText})
-  //browser.runtime.sendMessage({greeting: "Greeting from the content script"});
+  
+  var message = chrome.runtime.sendMessage({message: evento.target.innerText});
+
+  message.then(handleResponse, handleError);
+
   evento.target.classList.add('sep_speaking');
 });
 

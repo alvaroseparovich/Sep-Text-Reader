@@ -14,24 +14,15 @@ function loadContentScriptInAllTabs() {
 
 function initBackground(){
   loadContentScriptInAllTabs();
-  chrome.extension.onRequest.addListener(
-    function(request, sender, sendResponse) {
-      if (request['speak']) {
-        sep.text(request['speak']);
-        sep.speak();
-      }
-      else if(request[greeting]){
-        sep.text(request[greeting]);
-        sep.speak();
-      }
-    });
-/*
+  chrome.runtime.onMessage.addListener(handleMessage);
+}
+
 function handleMessage(request, sender, sendResponse) {
-  sep.text(request.greeting);
+  console.log("Message from the content script: " +
+  request.message);
+  sep.text(request.message);
   sep.speak();
   sendResponse({response: "Response from background script"});
-}*/
-
-browser.runtime.onMessage.addListener(handleMessage);
 }
+
 initBackground();
