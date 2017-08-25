@@ -12,11 +12,6 @@ function loadContentScriptInAllTabs() {
   });
 }
 
-function initBackground(){
-  loadContentScriptInAllTabs();
-  chrome.runtime.onMessage.addListener(handleMessage);
-}
-
 function handleMessage(request, sender, sendResponse) {
   console.log("Message from the content script: " +
   request.message);
@@ -24,5 +19,11 @@ function handleMessage(request, sender, sendResponse) {
   sep.speak();
   sendResponse({response: "Response from background script"});
 }
+
+function initBackground(){
+  loadContentScriptInAllTabs();
+  chrome.runtime.onMessage.addListener(handleMessage);
+}
+
 
 initBackground();

@@ -108,11 +108,13 @@ class Speaker{
 
 
   speak(){
-    while(this.textArray[0]){
+    /*while(this.textArray[0]){
       this.ssUtt.text = this.textArray[0];
       window.speechSynthesis.speak(this.ssUtt);
       this.textArray.shift();
-    }
+    }*/
+    this.ssUtt.text = this.textArray[0];
+    window.speechSynthesis.speak(this.ssUtt);
   }
 
 }
