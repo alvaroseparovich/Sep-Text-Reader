@@ -21,7 +21,6 @@ function handleMessage(request, sender, sendResponse) {
   console.log("Message from the content script: " +
   request.message);
   sep.text(request.message);
-  sep.speak();
   sendResponse({response: "Response from background script"});
 }
 

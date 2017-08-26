@@ -42,6 +42,7 @@ class Speaker{
   }
   text(text='text is empty'){
     this.ssUtt.text = text;
+      sep.speak();
   }
   lang(language='en-US'){
     this.ssUtt.lang = language;
