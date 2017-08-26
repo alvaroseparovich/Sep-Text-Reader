@@ -53,6 +53,58 @@ class Speaker{
     console.log('event');
   }
 
+  /*
+  organizeText(STRING){return ARRAY}*/
+  organizeText(text='no text was gived'){
+    let tLen = text.length;
+    let maxCaracters = 140;
+    let initIndex = 0;
+    let returnText = [];
+    let invertText = "";
+    let cutText = '';
+
+    if(tLen <= 140){return returnText.push(text);}
+
+    while(initIndex != tLen){
+
+      cutText = text.slice(initIndex, initIndex + maxCaracters);
+      if(((dotIndex = (invertText = invertStr(cutText)).search("[.]"))) >= 0){
+        pharse = cutText.slice(0,cutText.length - dotIndex);
+        returnText.push(pharse);
+        initIndex = initIndex + pharse.length;
+
+      }else if(((dotIndex = (invertText = invertStr(cutText)).search("[,]"))) >= 0){
+        pharse = cutText.slice(0,cutText.length - dotIndex);
+        returnText.push(pharse);
+        initIndex = initIndex + pharse.length;
+
+      }else if(((dotIndex = (invertText = invertStr(cutText)).search("[ ]"))) >= 0){
+        pharse = cutText.slice(0,cutText.length - dotIndex);
+        returnText.push(pharse);
+        initIndex = initIndex + pharse.length;
+
+      }else{
+
+        if (tLen >= initIndex+maxCaracters){
+          pharse = cutText;
+          returnText.push(pharse);
+          initIndex = initIndex + pharse.length;
+        }else{
+          returnText.push(text.slice(initIndex,tLen));
+          initIndex = initIndex + text.slice(initIndex,tLen).length;
+        }
+        if(initIndex == tLen){console.log('All Array was Sweeped')}
+
+      }
+    }
+    return returnText;
+  }
+
+  invertStr(string){
+    return string.split("").reverse().join("");
+  }
+
+
   speak(){
     window.speechSynthesis.speak(this.ssUtt);
   }
