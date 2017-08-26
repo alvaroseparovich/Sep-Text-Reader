@@ -19,6 +19,7 @@ class Speaker{
     this.ssUtt.pitch = this._pitch;
     this.ssUtt.text = this._text;
     this.ssUtt.lang = this._language;
+    this.ssUtt.onend = function(event) {this.continueSpeaking()};
   }
 
   //
@@ -41,8 +42,9 @@ class Speaker{
     this.ssUtt.pitch = pitch;
   }
   text(text='text is empty'){
+    this._array = [text,'segundo','terceiro','quarto'];
     this.ssUtt.text = text;
-      sep.speak();
+    sep.speak();
   }
   lang(language='en-US'){
     this.ssUtt.lang = language;
@@ -52,6 +54,11 @@ class Speaker{
     //this.text(target.innerContent);
     console.log(event);
     console.log('event');
+  }
+
+  continueSpeaking(){
+    this.ssUtt.text = this._array.shift();
+    window.speechSynthesis.speak(this.ssUtt);
   }
 
   /*
@@ -107,6 +114,7 @@ class Speaker{
 
 
   speak(){
+    this.ssUtt.text = this._array.shift();
     window.speechSynthesis.speak(this.ssUtt);
   }
 
