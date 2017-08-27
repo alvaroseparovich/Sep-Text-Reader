@@ -20,7 +20,7 @@ class Speaker{
     this.ssUtt.pitch = this._pitch;
     this.ssUtt.text = this._text;
     this.ssUtt.lang = this._language;
-    //this.ssUtt.onend = function(event) {setTimeOut( this.continueSpeaking(), event.elapsedTime )};
+
   }
 
   //
@@ -44,7 +44,7 @@ class Speaker{
   }
   text(text='text is empty'){
     this._array = [text,'segundo','terceiro','quarto'];
-    this.ssUtt.text = this._array.shift();
+    this.ssUtt.text = text;
     sep.speak();
   }
   lang(language='en-US'){
@@ -108,7 +108,6 @@ class Speaker{
     }
     return returnText;
   }
-
   invertStr(string){
     return string.split("").reverse().join("");
   }

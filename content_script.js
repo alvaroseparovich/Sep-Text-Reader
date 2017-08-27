@@ -1,16 +1,25 @@
 
-function handleResponse(message) {console.log(`Message from the background script:  ${message.response}`);}
-
-function handleError(error) {console.log(`Error: ${error}`);}
-
 document.addEventListener('dblclick', function p(evento){
-  console.log('Speak =>' + evento.target.innerText);
-  
-  var message = chrome.runtime.sendMessage({message: evento.target.innerText});
+  console.log('Run Speak content_script=>' + evento.target.innerText);
 
-  message.then(handleResponse, handleError);
+  var runTime = chrome.runtime;
+  var message = runTime.sendMessage({message: evento.target.innerText});
 
   evento.target.classList.add('sep_speaking');
 });
+
+
+function initContentScript(){
+  console.log('passou aqki');
+  chrome.runtime.onMessage.addListener(handleMessage);
+  console.log('passou aqki tambem');
+}
+
+function handleMessage(request, sender, sendResponse) {
+  console.log('rodou a response!!!');
+}
+
+initContentScript();
+
 
 console.log('content_script Played!');

@@ -18,10 +18,10 @@ function initBackground(){
 }
 
 function handleMessage(request, sender, sendResponse) {
-  console.log("Message from the content script: " +
-  request.message);
+  sep = new Speaker('pt-BR');
   sep.text(request.message);
-  sendResponse({response: "Response from background script"});
+  sendResponse({response: ["Response from background script"]});
+  console.log('rodouuuu');
 }
 
 initBackground();
