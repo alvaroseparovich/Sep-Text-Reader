@@ -1,3 +1,4 @@
+// class
 class Speaker{
 
   constructor(lang='en-US'){
@@ -20,6 +21,7 @@ class Speaker{
     this.ssUtt.pitch = this._pitch;
     this.ssUtt.text = this._text;
     this.ssUtt.lang = this._language;
+    this.ssUtt.onend = e => {this.continueSpeaking()};
 
   }
 
@@ -43,23 +45,32 @@ class Speaker{
     this.ssUtt.pitch = pitch;
   }
   text(text='text is empty'){
-    this._array = [text,'segundo','terceiro','quarto'];
-    this.ssUtt.text = text;
-    sep.speak();
+    this._array = this.organizeText(text);
+    this.ssUtt.text = this._array.shift();
   }
   lang(language='en-US'){
     this.ssUtt.lang = language;
   }
-
-  select(event){
-    //this.text(target.innerContent);
-    console.log(event);
-    console.log('event');
+  cancel(){
+    window.speechSynthesis.cancel();
+  }
+  pause(){
+    window.speechSynthesis.pause();
+  }
+  resume(){
+    window.speechSynthesis.resume();
   }
 
+
+
   continueSpeaking(){
-    this.ssUtt.text = this._array.shift();
-    window.speechSynthesis.speak(this.ssUtt);
+    if(!this._array.length == 0){
+      this.ssUtt.text = this._array.shift();
+      console.log(this.ssUtt.text);
+      window.speechSynthesis.speak(this.ssUtt);
+    }else{
+      console.log('finish');return;
+    }
   }
 
   /*
@@ -71,23 +82,32 @@ class Speaker{
     let returnText = [];
     let invertText = "";
     let cutText = '';
+    let dotIndex = 0;
+    let pharse = '';
 
-  if(tLen <= 140){returnText.push(text); return returnText;}
+    if(tLen <= 140){returnText.push(text); return returnText;}
 
     while(initIndex != tLen){
 
       cutText = text.slice(initIndex, initIndex + maxCaracters);
-      if(((dotIndex = (invertText = invertStr(cutText)).search("[.]"))) >= 0){
+
+      if(this.invertStr(cutText).search("[.]") >= 0){
+        invertText = this.invertStr(cutText);
+        dotIndex = invertText.search("[.]");
         pharse = cutText.slice(0,cutText.length - dotIndex);
         returnText.push(pharse);
         initIndex = initIndex + pharse.length;
 
-      }else if(((dotIndex = (invertText = invertStr(cutText)).search("[,]"))) >= 0){
+      }else if(this.invertStr(cutText).search("[,]") >= 0){
+        invertText = this.invertStr(cutText);
+        dotIndex = invertText.search("[,]");
         pharse = cutText.slice(0,cutText.length - dotIndex);
         returnText.push(pharse);
         initIndex = initIndex + pharse.length;
 
-      }else if(((dotIndex = (invertText = invertStr(cutText)).search("[ ]"))) >= 0){
+      }else if(this.invertStr(cutText).search("[ ]") >= 0){
+        invertText = this.invertStr(cutText);
+        dotIndex = invertText.search("[ ]");
         pharse = cutText.slice(0,cutText.length - dotIndex);
         returnText.push(pharse);
         initIndex = initIndex + pharse.length;
@@ -118,5 +138,11 @@ class Speaker{
   }
 
 }
+sep = new Speaker(/*'pt-BR'*/);
+//Modules
 
-sep = new Speaker('pt-BR');
+document.addEventListener('dblclick', function p(evento){
+  sep.text(evento.target.innerText);
+  sep.speak();
+  evento.target.classList.add('sep_speaking');
+});

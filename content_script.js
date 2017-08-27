@@ -7,6 +7,11 @@ document.addEventListener('dblclick', function p(evento){
   evento.target.classList.add('sep_speaking');
 });
 
+chrome.runtime.onMessage.addListener(handleMessage);
+
+function handleMessage(request, sender, sendResponse) {
+  console.log('rodou a response!!!');
+}
 /*
 function initContentScript(){
   console.log('passou aqki');
@@ -14,9 +19,6 @@ function initContentScript(){
   console.log('passou aqki tambem');
 }
 
-function handleMessage(request, sender, sendResponse) {
-  console.log('rodou a response!!!');
-}
 
 */
 console.log('content_script Played!');
