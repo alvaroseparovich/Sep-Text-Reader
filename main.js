@@ -11,6 +11,7 @@ class Speaker{
     this._pitch = 1;//0 to 2
     this._text = 'Void';
     this._language = lang;
+    this._array = [];
 
     this.ssUtt.voice = this._voice;
     this.ssUtt.voiceURI = this._voiceURI;
@@ -19,7 +20,7 @@ class Speaker{
     this.ssUtt.pitch = this._pitch;
     this.ssUtt.text = this._text;
     this.ssUtt.lang = this._language;
-    this.ssUtt.onend = function(event) {this.continueSpeaking()};
+    //this.ssUtt.onend = function(event) {setTimeOut( this.continueSpeaking(), event.elapsedTime )};
   }
 
   //
@@ -43,7 +44,7 @@ class Speaker{
   }
   text(text='text is empty'){
     this._array = [text,'segundo','terceiro','quarto'];
-    this.ssUtt.text = text;
+    this.ssUtt.text = this._array.shift();
     sep.speak();
   }
   lang(language='en-US'){
@@ -114,10 +115,7 @@ class Speaker{
 
 
   speak(){
-    this.ssUtt.text = this._array.shift();
     window.speechSynthesis.speak(this.ssUtt);
   }
 
 }
-
-sep = new Speaker('pt-BR');
