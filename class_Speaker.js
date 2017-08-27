@@ -118,3 +118,5 @@ class Speaker{
   }
 
 }
+
+sep = new Speaker('pt-BR');

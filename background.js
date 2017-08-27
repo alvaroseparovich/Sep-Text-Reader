@@ -18,9 +18,7 @@ function initBackground(){
 }
 
 function handleMessage(request, sender, sendResponse) {
-  sep = new Speaker('pt-BR');
   sep.text(request.message);
-  sendResponse({response: ["Response from background script"]});
   console.log('rodouuuu');
 }
 
