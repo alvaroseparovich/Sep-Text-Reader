@@ -8,7 +8,7 @@ class Speaker{
     this._voice = window.speechSynthesis.getVoices()[10];// Note: some voices don't support altering params
     this._voiceURI = 'native';
     this._volume = 1;// 0 to 1
-    this._rate = 2;// 0.1 to 10
+    this._rate = 1;// 0.1 to 10
     this._pitch = 1;//0 to 2
     this._text = 'Void';
     this._language = lang;
@@ -30,39 +30,31 @@ class Speaker{
   //Core Controller
   //
 
-  voice(voice){
-    this.ssUtt.voice = voice;
-  }
-  voiceURI(uri){
-    this.ssUtt.voiceURI = uri;
-  }
-  volume(volume=1){//need to make a filter of volume value, to don't allow mor than 1 or less than 0
-    this.ssUtt.volume = volume;
-  }
-  rate(rate=1){
-    this.ssUtt.rate = rate;
-  }
-  pitch(pitch=1){
-    this.ssUtt.pitch = pitch;
-  }
+//Modify SpeechSynthesisUtterance config...
+  volume(volume=1){ /*need to make a filter of volume value, to don't allow mor than 1 or less than 0*/
+   this.ssUtt.volume = volume;  }
+  voice(voice){    this.ssUtt.voice = voice;}
+  voiceURI(uri){    this.ssUtt.voiceURI = uri;  }
+  rate(rate=1){    this.ssUtt.rate = rate;  }
+  pitch(pitch=1){    this.ssUtt.pitch = pitch;  }
+  lang(language='en-US'){    this.ssUtt.lang = language;  }
+
+//selector of Text...
   text(element){
     this.elementPaint = element;
     this._array = this.organizeText(element.textContent);
     this.ssUtt.text = this._array.shift();
   }
-  lang(language='en-US'){
-    this.ssUtt.lang = language;
-  }
-  cancel(){
-    window.speechSynthesis.cancel();
-  }
-  pause(){
-    window.speechSynthesis.pause();
-  }
-  resume(){
-    window.speechSynthesis.resume();
-  }
 
+//Do Actions...
+  cancel(){    window.speechSynthesis.cancel();  }
+  pause(){    window.speechSynthesis.pause();  }
+  resume(){    window.speechSynthesis.resume();  }
+
+//get Status...
+  isPaused(){      return window.speechSynthesis.paused;/*it's not confidence, this status may fail*/ }
+  isSpeaking(){      return window.speechSynthesis.speaking;  }
+  isPending(){      return window.speechSynthesis.pending;  }
 
 
 
