@@ -10,7 +10,7 @@ document.addEventListener('click', event=>{
 });
 */
 document.addEventListener('click', event=>{
-  painter.splitTextSimpleDiv(event.target)
+  painter.splitAllChildElements(event.target)
 });
 
 document.onkeyup = e => {

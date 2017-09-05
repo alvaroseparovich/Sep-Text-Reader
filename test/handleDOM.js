@@ -19,16 +19,35 @@ class handleDOM{
   }
 
   splitAllChildElements(target){
-    if(target.hasChildNode()){
-      target.setAttribute('childSweeped',0);
+    let index;
+    if(target.children.length){
+      console.log('------->has-child');
+      //target.setAttribute('childSweeped',0);
 
-      while( target.getAttribute('childSweeped') < target.children.length){
+      for (index in target.children){
+        if(target.children[index] instanceof HTMLElement){
+          if(target.children[index].children == 0){
+            target.children[index] = this.splitTextSimpleDiv(target.children[index]);
+            console.log('------->call splitTextSimpleDiv because have no child from FOR LOOP');
+
+          }else{
+            this.splitAllChildElements(target.children[index]);
+            console.log('------->call splitAllChild from FOR LOOP');
+
+          }
+
+        }
+      }
+
+      /*while( target.getAttribute('childSweeped') < target.children.length){
+        console.log('------->While--childSweep');
 
         this.splitAllChildElements(target.children[target.getAttribute('childSweeped')]);
         target.setAttribute('childSweeped', target.getAttribute('childSweeped')+1);
 
-      }
+      }*/
     }else{
+      console.log('------->else split simple');
       target = this.splitTextSimpleDiv(target);
     }
   }
