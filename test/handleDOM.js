@@ -4,7 +4,8 @@ class handleDOM{
     this.arrayOrganizada;
     this.arrayL;
     this.arrayIndice;
-    this.ttText;
+    this.textUN;
+
   }
 
   paintDomO(target){
@@ -20,9 +21,15 @@ class handleDOM{
     this.arrayL = this.arrayOrganizada.length;
     this.arrayIndice = 0;
 
-    while(this.arrayIndice < this.arrayL){
+    target.innerHTML = "<splited>" + this.arrayOrganizada[this.arrayIndice] + "</splited>";
+    this.arrayIndice++;
 
-      target.innerHTML = target.innerHTML.replace(this.arrayOrganizada[this.arrayIndice],"<splited>"+this.arrayOrganizada[this.arrayIndice]+"</splited>");
+    while(this.arrayIndice < this.arrayL){
+      this.textUN = this.arrayOrganizada[this.arrayIndice];
+      target.innerHTML = target.innerHTML + "<splited>" + this.textUN + "</splited>";
+      console.log(this.textUN);
+      console.log(target.innerHTML);
+
       this.arrayIndice ++;
 
     }
