@@ -22,7 +22,6 @@ class handleDOM{
     let index;
     if(target.children.length){
       console.log('------->has-child');
-      //target.setAttribute('childSweeped',0);
 
       for (index in target.children){
         if(target.children[index] instanceof HTMLElement){
@@ -33,19 +32,9 @@ class handleDOM{
           }else{
             this.splitAllChildElements(target.children[index]);
             console.log('------->call splitAllChild from FOR LOOP');
-
           }
-
         }
       }
-
-      /*while( target.getAttribute('childSweeped') < target.children.length){
-        console.log('------->While--childSweep');
-
-        this.splitAllChildElements(target.children[target.getAttribute('childSweeped')]);
-        target.setAttribute('childSweeped', target.getAttribute('childSweeped')+1);
-
-      }*/
     }else{
       console.log('------->else split simple');
       target = this.splitTextSimpleDiv(target);
