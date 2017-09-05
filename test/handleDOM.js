@@ -1,6 +1,10 @@
 class handleDOM{
   constructor(){
     this.is = 'cool';
+    this.arrayOrganizada;
+    this.arrayL;
+    this.arrayIndice;
+    this.ttText;
   }
 
   paintDomO(target){
@@ -11,7 +15,19 @@ class handleDOM{
     target.innerHTML = target.innerHTML.replace(textToHighligth,"<high class='Readed'>"+textToHighligth+"</high>");
 
   }
+  splitTextSimpleDiv(target){
+    this.arrayOrganizada = sep.organizeText(target.innerText);
+    this.arrayL = this.arrayOrganizada.length;
+    this.arrayIndice = 0;
 
+    while(this.arrayIndice < this.arrayL){
+
+      target.innerHTML = target.innerHTML.replace(this.arrayOrganizada[this.arrayIndice],"<splited>"+this.arrayOrganizada[this.arrayIndice]+"</splited>");
+      this.arrayIndice ++;
+
+    }
+
+  }
 
 
 

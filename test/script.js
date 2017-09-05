@@ -1,4 +1,4 @@
-
+/*
 document.addEventListener('dblclick', function p(event){
   sep.text(event.target.parentElement);
   sep.speak();
@@ -7,6 +7,10 @@ document.addEventListener('dblclick', function p(event){
 
 document.addEventListener('click', event=>{
   painter.paintDomO(event.target)
+});
+*/
+document.addEventListener('click', event=>{
+  painter.splitTextSimpleDiv(event.target)
 });
 
 document.onkeyup = e => {

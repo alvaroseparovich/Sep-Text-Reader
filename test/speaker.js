@@ -45,7 +45,7 @@ class Speaker{
     this.elementPaint = element;
     this._array = this.organizeText(element.textContent);
     this.ssUtt.text = this._array[this.arrayI];
-    this.arrayI = this.arrayI + 1;
+    this.arrayI ++;
   }
 
 //Do Actions...
@@ -63,7 +63,7 @@ class Speaker{
   continueSpeaking(){
     if(!this._array.length == 0){
       this.ssUtt.text = this._array[this.arrayI];
-      this.arrayI = this.arrayI + 1;
+      this.arrayI ++;
       console.log(this.ssUtt.text);
       this.speak();
 
