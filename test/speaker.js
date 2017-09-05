@@ -14,6 +14,7 @@ class Speaker{
     this._language = lang;
     this._array = [];
     this.elementPaint = '';
+    this.arrayI = 0; //index para leitura dos textos
 
     this.ssUtt.voice = this._voice;
     this.ssUtt.voiceURI = this._voiceURI;
@@ -43,7 +44,8 @@ class Speaker{
   text(element){
     this.elementPaint = element;
     this._array = this.organizeText(element.textContent);
-    this.ssUtt.text = this._array.shift();
+    this.ssUtt.text = this._array[this.arrayI];
+    this.arrayI = this.arrayI + 1;
   }
 
 //Do Actions...
@@ -60,9 +62,11 @@ class Speaker{
 
   continueSpeaking(){
     if(!this._array.length == 0){
-      this.ssUtt.text = this._array.shift();
+      this.ssUtt.text = this._array[this.arrayI];
+      this.arrayI = this.arrayI + 1;
       console.log(this.ssUtt.text);
       this.speak();
+
     }else{
       console.log('finish');return;
     }
