@@ -20,21 +20,22 @@ class handleDOM{
 
   splitAllChildElements(target){
     let index;
+    console.log(target);
     if(target.children.length){
       console.log('------->has-child');
 
-      for (index in target.children){
-        if(target.children[index] instanceof HTMLElement){
-          if(target.children[index].children == 0){
-            target.children[index] = this.splitTextSimpleDiv(target.children[index]);
-            console.log('------->call splitTextSimpleDiv because have no child from FOR LOOP');
+      target.childNodes.forEach(node=>{
+        console.log(node)
+        if(node instanceof HTMLElement){
+          node = this.splitTextSimpleDiv(node);
+          console.log('------->call splitTextSimpleDiv because have no child from FOR LOOP');
 
-          }else{
-            this.splitAllChildElements(target.children[index]);
-            console.log('------->call splitAllChild from FOR LOOP');
-          }
+        }else if( node.toString() == "[object Text]"){
+        target = this.splitTextSimpleDiv(target);
+          console.log('------->call splitAllChild from FOR LOOP');
         }
-      }
+      });
+
     }else{
       console.log('------->else split simple');
       target = this.splitTextSimpleDiv(target);
