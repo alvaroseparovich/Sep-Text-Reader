@@ -12,15 +12,15 @@ document.addEventListener('click', event=>{
 document.addEventListener('click', event=>{
   painter.splitAllChildElements(event.target)
 });
-
+var voicePause = false;
 document.onkeyup = e => {
   console.log(e);
   switch( e.code ) {
     case "Space":
 
-      if( !sep.isPaused() ){sep.pause();console.log("Pause()");}
-      else if(sep.isPaused()){
-        sep.resume(); console.log("Resume()");
+      if( !voicePause ){sep.pause();console.log("Pause()"); voicePause = !voicePause;}
+      else if(voicePause){
+        sep.resume(); console.log("Resume()");voicePause = !voicePause;
       }
         break;
 

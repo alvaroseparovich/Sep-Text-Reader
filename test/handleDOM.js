@@ -6,6 +6,7 @@ class handleDOM{
     this.arrayIndice;
     this.textUN;
     this.childrenI = 0;
+    this.idIndice = 0;
 
   }
 
@@ -47,12 +48,14 @@ class handleDOM{
     this.arrayL = this.arrayOrganizada.length;
     this.arrayIndice = 0;
 
-    target.innerHTML = "<splited>" + this.arrayOrganizada[this.arrayIndice] + "</splited>";
+    target.innerHTML = "<splited id='" + this.idIndice +"'>" + this.arrayOrganizada[this.arrayIndice] + "</splited>";
     this.arrayIndice++;
+    this.idIndice++;
 
     while(this.arrayIndice < this.arrayL){
       this.textUN = this.arrayOrganizada[this.arrayIndice];
-      target.innerHTML = target.innerHTML + "<splited>" + this.textUN + "</splited>";
+      target.innerHTML = target.innerHTML + "<splited id='" + this.idIndice +"'>" + this.textUN + "</splited>";
+      this.idIndice++;
       console.log(this.textUN);
       console.log(target.innerHTML);
 
