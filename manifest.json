@@ -10,7 +10,7 @@
     "tts",
 		"tabs"
 	],
-	"background":{"scripts":["background.js","main.js"]},
+	"background":{"scripts":["background.js","class_Speaker.js"]},
 	"content_scripts": [
     {
       "matches":		 ["<all_urls>"],

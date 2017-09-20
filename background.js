@@ -12,12 +12,19 @@ function loadContentScriptInAllTabs() {
   });
 }
 
+<<<<<<< HEAD
+function initBackground(){
+  loadContentScriptInAllTabs();
+  chrome.runtime.onMessage.addListener(handleMessage);
+
+  var message = chrome.runtime.sendMessage({message:'run this snippet'});
+}
+
+=======
+>>>>>>> master
 function handleMessage(request, sender, sendResponse) {
-  console.log("Message from the content script: " +
-  request.message);
   sep.text(request.message);
-  sep.speak();
-  sendResponse({response: "Response from background script"});
+  console.log('rodouuuu');
 }
 
 function initBackground(){
