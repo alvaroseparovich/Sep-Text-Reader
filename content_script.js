@@ -1,10 +1,23 @@
 
+<<<<<<< HEAD
 document.addEventListener('dblclick', function p(evento){
   console.log('Run Speak content_script=>' + evento.target.innerText);
   var runTime = chrome.runtime;
   var message = runTime.sendMessage({message: evento.target.innerText});
+=======
+function handleResponse(message) {console.log(`Message from the background script:  ${message.response}`);}
 
-  evento.target.classList.add('sep_speaking');
+function handleError(error) {console.log(`Error: ${error}`);}
+
+document.addEventListener('dblclick', e => {
+  console.log('Speak =>' + e.target.innerText);
+
+  var message = chrome.runtime.sendMessage({message: e.target.innerText});
+
+  message.then(handleResponse, handleError);
+>>>>>>> master
+
+  e.target.classList.add('sep_speaking');
 });
 
 chrome.runtime.onMessage.addListener(handleMessage);

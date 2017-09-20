@@ -12,6 +12,7 @@ function loadContentScriptInAllTabs() {
   });
 }
 
+<<<<<<< HEAD
 function initBackground(){
   loadContentScriptInAllTabs();
   chrome.runtime.onMessage.addListener(handleMessage);
@@ -19,9 +20,17 @@ function initBackground(){
   var message = chrome.runtime.sendMessage({message:'run this snippet'});
 }
 
+=======
+>>>>>>> master
 function handleMessage(request, sender, sendResponse) {
   sep.text(request.message);
   console.log('rodouuuu');
 }
+
+function initBackground(){
+  loadContentScriptInAllTabs();
+  chrome.runtime.onMessage.addListener(handleMessage);
+}
+
 
 initBackground();
