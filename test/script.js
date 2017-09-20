@@ -35,7 +35,7 @@ document.onkeyup = e => {
         break;
 
     case "KeyC":
-        sep.cancel();  console.log("cancel()");
+        sep._cancel = 1; sep.cancel();  console.log("cancel()");
         break;
     default:
         console.log('apertou um botão'+ e);
