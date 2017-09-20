@@ -140,7 +140,7 @@ class Speaker{
       this.speak();
   }
   speak(){
-    painter.TextPaint(this.elementPaint, this.ssUtt.text);
+    painter.TextPaint(this._array.querySelector("#a"+ (this.arrayI - 1)));
     window.speechSynthesis.speak(this.ssUtt);
   }
 

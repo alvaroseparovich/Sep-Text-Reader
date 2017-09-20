@@ -13,11 +13,12 @@ class handleDOM{
   paintDomO(target){
     target.classList.add('speaking');
   }
-  TextPaint(target, textToHighligth){
-    /*if(target.querySelector('.Readed')){target.querySelector('.Readed').classList.remove('Readed');}
-    target.innerHTML = target.innerHTML.replace(textToHighligth,"<high class='Readed'>"+textToHighligth+"</high>");
-    */
-    console.log('pass TextPaint()')
+  TextPaint(target){
+    if(document.querySelector('.Readed')){document.querySelector('.Readed').classList.remove('Readed');}
+    target.classList.add('Readed');
+
+    console.log('pass TextPaint()');
+    console.log(target);
   }
 
   splitAllChildElements(target){
