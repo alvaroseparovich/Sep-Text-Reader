@@ -14,9 +14,10 @@ class handleDOM{
     target.classList.add('speaking');
   }
   TextPaint(target, textToHighligth){
-    if(target.querySelector('.Readed')){target.querySelector('.Readed').classList.remove('Readed');}
+    /*if(target.querySelector('.Readed')){target.querySelector('.Readed').classList.remove('Readed');}
     target.innerHTML = target.innerHTML.replace(textToHighligth,"<high class='Readed'>"+textToHighligth+"</high>");
-
+    */
+    console.log('pass TextPaint()')
   }
 
   splitAllChildElements(target){
@@ -48,13 +49,13 @@ class handleDOM{
     this.arrayL = this.arrayOrganizada.length;
     this.arrayIndice = 0;
 
-    target.innerHTML = "<splited id='" + this.idIndice +"'>" + this.arrayOrganizada[this.arrayIndice] + "</splited>";
+    target.innerHTML = "<splited id='a" + this.idIndice +"'>" + this.arrayOrganizada[this.arrayIndice] + "</splited>";
     this.arrayIndice++;
     this.idIndice++;
 
     while(this.arrayIndice < this.arrayL){
       this.textUN = this.arrayOrganizada[this.arrayIndice];
-      target.innerHTML = target.innerHTML + "<splited id='" + this.idIndice +"'>" + this.textUN + "</splited>";
+      target.innerHTML = target.innerHTML + "<splited id='a" + this.idIndice +"'>" + this.textUN + "</splited>";
       this.idIndice++;
       console.log(this.textUN);
       console.log(target.innerHTML);

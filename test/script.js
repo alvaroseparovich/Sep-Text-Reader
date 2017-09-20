@@ -10,6 +10,16 @@ document.addEventListener('click', event=>{
 });
 */
 document.addEventListener('click', event=>{
+  sep.speakThat(event.target.id);
+});
+document.addEventListener('DOMContentLoaded', e=>{
+  content = document.querySelector('content');
+  painter.splitAllChildElements(content);
+  sep.text(content);
+}
+);
+
+document.addEventListener('dbclick', event=>{
   painter.splitAllChildElements(event.target)
 });
 var voicePause = false;

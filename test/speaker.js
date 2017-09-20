@@ -41,10 +41,11 @@ class Speaker{
   lang(language='en-US'){    this.ssUtt.lang = language;  }
 
 //selector of Text...
-  text(element){
+  text(element){/*
     this.elementPaint = element;
-    this._array = this.organizeText(element.textContent);
-    this.ssUtt.text = this._array[this.arrayI];
+    this._array = this.organizeText(element.textContent);*/
+    this._array = element;
+    this.ssUtt.text = this._array.querySelector("#a"+this.arrayI);
     this.arrayI ++;
   }
 
@@ -61,8 +62,8 @@ class Speaker{
 
 
   continueSpeaking(){
-    if(!this._array.length == 0){
-      this.ssUtt.text = this._array[this.arrayI];
+    if(this._array.querySelector("#a"+this.arrayI)){
+      this.ssUtt.text = this._array.querySelector("#a"+this.arrayI).innerText;
       this.arrayI ++;
       console.log(this.ssUtt.text);
       this.speak();
@@ -131,7 +132,13 @@ class Speaker{
     return string.split("").reverse().join("");
   }
 
-
+  speakThat(id='a0'){
+      this.arrayI = id.substr(1, id.length)
+      this.ssUtt.text = this._array.querySelector("#a"+this.arrayI).innerText;
+      this.arrayI ++;
+      console.log(this.ssUtt.text);
+      this.speak();
+  }
   speak(){
     painter.TextPaint(this.elementPaint, this.ssUtt.text);
     window.speechSynthesis.speak(this.ssUtt);
