@@ -49,11 +49,13 @@ class Speaker{
   lang(language='en-US'){    this.ssUtt.lang = language;  }
 
 //selector of Text...
-  text(element){/*
-    this.elementPaint = element;
-    this._array = this.organizeText(element.textContent);*/
+  text(element){
     this._array = element;
-    this.ssUtt.text = this._array.querySelector("#a"+this.arrayI);
+    this.actualizeTextByArray();
+  }
+
+  actualizeTextByArray(){
+    this.ssUtt.text = this._array.querySelector("#a"+this.arrayI).innerText;
     this.arrayI ++;
   }
 
@@ -71,10 +73,9 @@ class Speaker{
 
   continueSpeaking(){
     if(this._array.querySelector("#a"+this.arrayI)){
-      this.ssUtt.text = this._array.querySelector("#a"+this.arrayI).innerText;
-      this.arrayI ++;
-      console.log(this.ssUtt.text);
+      this.actualizeTextByArray();
       this.speak();
+      //console.log(this.ssUtt.text);
 
     }else{
       console.log('finish');return;
@@ -83,7 +84,7 @@ class Speaker{
 
 //function to cancel anything that is speaking
   cancelSpeak(){
-    sep._cancel = 1; sep.cancel();  console.log("cancelSpeak()");
+    sep._cancel = 1; sep.cancel(); console.log("cancelSpeak()"); sep._cancel = 0;
   }
 
   /*
