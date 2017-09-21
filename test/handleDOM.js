@@ -13,6 +13,7 @@ class handleDOM{
   paintDomO(target){
     target.classList.add('speaking');
   }
+
   TextPaint(target){
     if(document.querySelector('.Readed')){document.querySelector('.Readed').classList.remove('Readed');}
     target.classList.add('Readed');
@@ -23,24 +24,24 @@ class handleDOM{
 
   splitAllChildElements(target){
     let index;
-    console.log(target);
+    //console.log(target);
     if(target.children.length){
-      console.log('------->has-child');
+      //console.log('------->has-child');
 
       target.childNodes.forEach(node=>{
-        console.log(node)
+        //console.log(node)
         if(node instanceof HTMLElement){
           node = this.splitTextSimpleDiv(node);
-          console.log('------->call splitTextSimpleDiv because have no child from FOR LOOP');
+          //console.log('------->call splitTextSimpleDiv because have no child from FOR LOOP');
 
         }else if( node.toString() == "[object Text]"){
-        target = this.splitTextSimpleDiv(target);
-          console.log('------->call splitAllChild from FOR LOOP');
+          target = this.splitTextSimpleDiv(target);
+          //console.log('------->call splitAllChild from FOR LOOP');
         }
       });
 
     }else{
-      console.log('------->else split simple');
+      //console.log('------->else split simple');
       target = this.splitTextSimpleDiv(target);
     }
   }

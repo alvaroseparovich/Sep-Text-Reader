@@ -35,21 +35,25 @@ class Speaker{
 
   }
 
-  //
-  //Core Controller
-  //
+  //Modify SpeechSynthesisUtterance config...
+  volume(volume=1)/* 0-1 */{  this.ssUtt.volume = volume;  }
+  voice(voice){               this.ssUtt.voice = voice;}
+  voiceURI(uri){              this.ssUtt.voiceURI = uri;  }
+  rate(rate=1){               this.ssUtt.rate = rate;  }
+  pitch(pitch=1){             this.ssUtt.pitch = pitch;  }
+  lang(language='en-US'){     this.ssUtt.lang = language;  }
 
-//Modify SpeechSynthesisUtterance config...
-  volume(volume=1){ /*need to make a filter of volume value, to don't allow mor than 1 or less than 0*/
-   this.ssUtt.volume = volume;  }
-  voice(voice){    this.ssUtt.voice = voice;}
-  voiceURI(uri){    this.ssUtt.voiceURI = uri;  }
-  rate(rate=1){    this.ssUtt.rate = rate;  }
-  pitch(pitch=1){    this.ssUtt.pitch = pitch;  }
-  lang(language='en-US'){    this.ssUtt.lang = language;  }
+  //Do Actions...
+  cancel(){    window.speechSynthesis.cancel();  }
+  pause(){    window.speechSynthesis.pause();  }
+  resume(){    window.speechSynthesis.resume();  }
+  //get Status...
+  isPaused(){      return window.speechSynthesis.paused;/*it's not confidence, this status may fail*/ }
+  isSpeaking(){      return window.speechSynthesis.speaking;  }
+  isPending(){      return window.speechSynthesis.pending;  }
 
-//selector of Text...
   text(element){
+    //receive an array of short texts to be spoken
     this._array = element;
     this.actualizeTextByArray();
   }
@@ -58,18 +62,6 @@ class Speaker{
     this.ssUtt.text = this._array.querySelector("#a"+this.arrayI).innerText;
     this.arrayI ++;
   }
-
-//Do Actions...
-  cancel(){    window.speechSynthesis.cancel();  }
-  pause(){    window.speechSynthesis.pause();  }
-  resume(){    window.speechSynthesis.resume();  }
-
-//get Status...
-  isPaused(){      return window.speechSynthesis.paused;/*it's not confidence, this status may fail*/ }
-  isSpeaking(){      return window.speechSynthesis.speaking;  }
-  isPending(){      return window.speechSynthesis.pending;  }
-
-
 
   continueSpeaking(){
     if(this._array.querySelector("#a"+this.arrayI)){
@@ -82,14 +74,12 @@ class Speaker{
     }
   }
 
-//function to cancel anything that is speaking
   cancelSpeak(){
     sep._cancel = 1; sep.cancel(); console.log("cancelSpeak()"); sep._cancel = 0;
   }
 
-  /*
-  organizeText(STRING){return ARRAY}*/
   organizeText(text='no text was gived'){
+    /*  organizeText(STRING){return ARRAY}*/
     let tLen = text.length;
     let maxCaracters = 140;
     let initIndex = 0;
@@ -142,6 +132,7 @@ class Speaker{
     }
     return returnText;
   }
+
   invertStr(string){
     return string.split("").reverse().join("");
   }
@@ -159,6 +150,7 @@ class Speaker{
       this.speak();
     }
   }
+
   speak(){
     painter.TextPaint(this._array.querySelector("#a"+ (this.arrayI - 1)));
     window.speechSynthesis.speak(this.ssUtt);
