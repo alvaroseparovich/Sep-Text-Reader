@@ -10,7 +10,6 @@ document.addEventListener('click', event=>{
 });
 */
 document.addEventListener('click', event=>{
-  sep._cancel = 1; sep.cancel();  console.log("cancel()");
   sep.speakThat(event.target.id);
 });
 document.addEventListener('DOMContentLoaded', e=>{

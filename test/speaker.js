@@ -9,7 +9,7 @@ class Speaker{
     this._voiceURI = 'native';
     this._volume = 1;// 0 to 1
     this._rate = 1;// 0.1 to 10
-    this._pitch = 1;//0 to 2
+    this._pitch = 1;// 0 to 2
     this._text = 'Void';
     this._language = lang;
     this._array = [];
@@ -81,6 +81,11 @@ class Speaker{
     }
   }
 
+//function to cancel anything that is speaking
+  cancelSpeak(){
+    sep._cancel = 1; sep.cancel();  console.log("cancelSpeak()");
+  }
+
   /*
   organizeText(STRING){return ARRAY}*/
   organizeText(text='no text was gived'){
@@ -141,6 +146,7 @@ class Speaker{
   }
 
   speakThat(id='a0'){
+    sep.cancelSpeak();
     if(!this.ssUtt.text == 'Void'){
       this.arrayI = id.substr(1, id.length);
       this.cancel();
