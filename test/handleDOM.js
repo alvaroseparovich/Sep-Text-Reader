@@ -15,7 +15,10 @@ class handleDOM{
   }
 
   TextPaint(target){
-    if(document.querySelector('.Readed')){document.querySelector('.Readed').classList.remove('Readed');}
+    if(document.querySelector('.Readed')){
+      document.querySelector('.Readed')
+      .classList.remove('Readed');}
+
     target.classList.add('Readed');
 
     console.log('pass TextPaint()');

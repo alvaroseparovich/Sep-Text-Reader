@@ -25,15 +25,14 @@ document.addEventListener('dbclick', event=>{
   painter.splitAllChildElements(event.target)
 });
 
-var voicePause = false;
 document.onkeyup = e => {
-  console.log(e);
+  //console.log(e);
   switch( e.code ) {
     case "Space":
 
-      if( !voicePause ){sep.pause();console.log("Pause()"); voicePause = !voicePause;}
-      else if(voicePause){
-        sep.resume(); console.log("Resume()");voicePause = !voicePause;
+      if( !sep.voicePause ){sep.pause();console.log("Pause()"); sep.voicePause = !sep.voicePause;}
+      else if(sep.voicePause){
+        sep.resume(); console.log("Resume()");sep.voicePause = !sep.voicePause;
       }
         break;
 

@@ -16,6 +16,7 @@ class Speaker{
     this.elementPaint = '';
     this.arrayI = 0; //index para leitura dos textos
     this._cancel = 0;
+    this.voicePause = false;
 
     this.ssUtt.voice = this._voice;
     this.ssUtt.voiceURI = this._voiceURI;
@@ -60,6 +61,7 @@ class Speaker{
 
   actualizeTextByArray(){
     this.ssUtt.text = this._array.querySelector("#a"+this.arrayI).innerText;
+    painter.TextPaint(this._array.querySelector("#a"+this.arrayI));
     this.arrayI ++;
   }
 
@@ -139,20 +141,16 @@ class Speaker{
 
   speakThat(id='a0'){
     sep.cancelSpeak();
-    if(!this.ssUtt.text == 'Void'){
-      this.arrayI = id.substr(1, id.length);
-      this.cancel();
-    }else{
-      this.arrayI = id.substr(1, id.length)
-      this.ssUtt.text = this._array.querySelector("#a"+this.arrayI).innerText;
-      this.arrayI ++;
-      console.log(this.ssUtt.text);
-      this.speak();
-    }
+    this.arrayI = id.substr(1, id.length)
+    this.actualizeTextByArray();
+    //console.log(this.ssUtt.text);
+    console.log('speak that');
+    this.speak();
+
   }
 
   speak(){
-    painter.TextPaint(this._array.querySelector("#a"+ (this.arrayI - 1)));
+    this.voicePause = false;
     window.speechSynthesis.speak(this.ssUtt);
   }
 
