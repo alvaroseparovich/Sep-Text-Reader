@@ -21,8 +21,9 @@ class handleDOM{
 
     target.classList.add('Readed');
 
-    console.log('pass TextPaint()');
-    console.log(target);
+    //console.log('pass TextPaint()');
+    //console.log(target);
+    //console.log(  sep.arrayI);
   }
 
   splitAllChildElements(target){

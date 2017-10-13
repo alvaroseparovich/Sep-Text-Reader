@@ -11,7 +11,9 @@ document.addEventListener('click', event=>{
 */
 
 document.addEventListener('click', event=>{
-  sep.speakThat(event.target.id);
+  sep.cancelingKey(0);
+  sep.speakThat(event.target);
+  console.log(event.target);
 });
 
 document.addEventListener('DOMContentLoaded', e=>{
@@ -37,7 +39,8 @@ document.onkeyup = e => {
         break;
 
     case "KeyC":
-        sep._cancel = 1; sep.cancel();  console.log("cancel()");
+        sep.cancelingKey(1);
+        sep.cancelSpeak();
         break;
     default:
         console.log('apertou um botão'+ e);

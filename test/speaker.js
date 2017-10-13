@@ -8,14 +8,15 @@ class Speaker{
     this._voice = window.speechSynthesis.getVoices()[10];// Note: some voices don't support altering params
     this._voiceURI = 'native';
     this._volume = 1;// 0 to 1
-    this._rate = 1;// 0.1 to 10
+    this._rate = 1.5;// 0.1 to 10 ... but 2 is too fast!
     this._pitch = 1;// 0 to 2
     this._text = 'Void';
     this._language = lang;
     this._array = [];
     this.elementPaint = '';
     this.arrayI = 0; //index para leitura dos textos
-    this._cancel = 0;
+    this.canceling = 0;
+    this._cancelingKey = 0;
     this.voicePause = false;
 
     this.ssUtt.voice = this._voice;
@@ -26,11 +27,23 @@ class Speaker{
     this.ssUtt.text = this._text;
     this.ssUtt.lang = this._language;
     this.ssUtt.onend = e => {
-      if(!this._cancel){
+      console.log("acabou uma fala! " + e.elapsedTime)
+      if (this.isSpeaking) {
+        console.log("is speaking!");
+      }
+      if (e.elapsedTime < 10) {
+        this.canceling = 1
+          console.log("lapse time low, canceled");
+        }
+
+
+      if(!this.canceling)/*if ZERO*/{
         this.continueSpeaking()
-      }else if(this._cancel){
+        console.log(this.canceling + " continue speaking");
+      }else if(this.canceling)/*if ONE*/{
         console.log('cancelado a continuação!');
-        this._cancel = 0;
+        console.log(this.canceling);
+        this.canceling = 0;
       }
     };
 
@@ -50,7 +63,7 @@ class Speaker{
   resume(){    window.speechSynthesis.resume();  }
   //get Status...
   isPaused(){      return window.speechSynthesis.paused;/*it's not confidence, this status may fail*/ }
-  isSpeaking(){      return window.speechSynthesis.speaking;  }
+  isSpeaking(){      return window.speechSynthesis.speaking;  /*confident*/}
   isPending(){      return window.speechSynthesis.pending;  }
 
   text(element){
@@ -59,9 +72,23 @@ class Speaker{
     this.actualizeTextByArray();
   }
 
-  actualizeTextByArray(){
+  cancelingKey(key){
+    /* when a key of canceling is presse, this func will mark to not continue sep_speaking
+      and when a speaking is pressed this func will mark to continue Speaking*/
+      if (key){
+        this.canceling = 1;
+      }else if(!key){
+        this.canceling = 0;
+      }
+  }
+
+  actualizeTextByArray(target="no-target"){
     this.ssUtt.text = this._array.querySelector("#a"+this.arrayI).innerText;
+    this._array.querySelector("#a"+this.arrayI).classList;
+    if(target == "no-target"){
+      console.log("no-target");
     painter.TextPaint(this._array.querySelector("#a"+this.arrayI));
+    }else{painter.TextPaint(target);}
     this.arrayI ++;
   }
 
@@ -69,7 +96,7 @@ class Speaker{
     if(this._array.querySelector("#a"+this.arrayI)){
       this.actualizeTextByArray();
       this.speak();
-      //console.log(this.ssUtt.text);
+      console.log(this.ssUtt.text);
 
     }else{
       console.log('finish');return;
@@ -77,7 +104,7 @@ class Speaker{
   }
 
   cancelSpeak(){
-    sep._cancel = 1; sep.cancel(); console.log("cancelSpeak()"); sep._cancel = 0;
+    this.cancel(); console.log("cancelSpeak()");
   }
 
   organizeText(text='no text was gived'){
@@ -91,7 +118,7 @@ class Speaker{
     let dotIndex = 0;
     let pharse = '';
 
-    if(tLen <= 140){returnText.push(text); return returnText;}
+    if(tLen <= maxCaracters){returnText.push(text); return returnText;}
 
     while(initIndex != tLen){
 
@@ -139,12 +166,13 @@ class Speaker{
     return string.split("").reverse().join("");
   }
 
-  speakThat(id='a0'){
-    sep.cancelSpeak();
+  speakThat(target){
+    let id = target.id;
+
+    if(this.isSpeaking){/*this.canceling = 1;*/this.cancelSpeak();}
+
     this.arrayI = id.substr(1, id.length)
-    this.actualizeTextByArray();
-    //console.log(this.ssUtt.text);
-    console.log('speak that');
+    this.actualizeTextByArray(target);
     this.speak();
 
   }
@@ -154,6 +182,7 @@ class Speaker{
     window.speechSynthesis.speak(this.ssUtt);
   }
 
+
 }
-sep = new Speaker(/*'pt-BR'*/);
+sep = new Speaker('pt-BR');
 //Modules
